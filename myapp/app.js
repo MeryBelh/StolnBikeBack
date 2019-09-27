@@ -10,8 +10,7 @@ var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var bikeRouter = require('./routes/bike');
-var usersRouter = require('./routes/users');
-var routes = require('./routes/bike'); 
+var policesOfficerRouter = require('./routes/policeofficer');
 
 
 var app = express();
@@ -30,10 +29,8 @@ app.use(cors({origin: 'http://localhost:8000'}));
 
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
-//app.use('/bikes', bikeRouter);
 bikeRouter(app);
-routes(app); //register the route
+policesOfficerRouter(app);
 
 
 // catch 404 and forward to error handler

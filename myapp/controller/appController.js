@@ -97,3 +97,28 @@ exports.list_all_bikes = function(req, res) {
     res.send(task);
   });
 };
+
+/**
+ * police officer
+ */
+var PoliceOfficer = require('../model/policeOfficerModel.js');
+
+
+exports.authenticate = function(req, res) {
+
+    var policeOfficerToAuth = new PoliceOfficer(req.body);
+
+    //handles null error 
+     if(!policeOfficerToAuth.login || !policeOfficerToAuth.passwd){
+              res.status(400).send({ error:true, message: 'Please provide userName/passeword' });
+          }
+  else{
+    PoliceOfficer.authenticate(policeOfficerToAuth, function(err, police) {   
+      if (err)
+        res.send(err);
+      res.json(police);
+    });
+  }
+  };
+  
+  
