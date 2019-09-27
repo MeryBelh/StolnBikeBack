@@ -85,3 +85,15 @@ else{
   });
 }
 };
+
+
+exports.list_all_bikes = function(req, res) {
+  Bike.getAllbikes(function(err, task) {
+
+    console.log('controller')
+    if (err)
+      res.send(err);
+      console.log('res', task);
+    res.send(task);
+  });
+};

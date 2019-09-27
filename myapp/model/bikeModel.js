@@ -24,4 +24,20 @@ Bike.createBike = function (newBike, result) {
             });           
 };
 
+Bike.getAllbikes = function (result) {
+    sql.query("Select * from bikes", function (err, res) {
+
+            if(err) {
+                console.log("error: ", err);
+                result(null, err);
+            }
+            else{
+              console.log('bikes : ', res);  
+
+             result(null, res);
+            }
+        });   
+};
+
+
 module.exports= Bike;
