@@ -36,3 +36,15 @@ ALTER TABLE `policeOfficers` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 INSERT INTO `policeOfficers` (`id`, `login`, `passwd`, `email`) VALUES
 (1, 'police1', 'police1', 'police1@gmail.com');
+
+/**stolenBikeCases resoved*/
+CREATE TABLE IF NOT EXISTS  `stolenBikeCases` (
+    `id` int(11) NOT NULL,
+    `policeID` int NOT NULL,
+    `bikeID` int NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (policeID) REFERENCES policeOfficers(id),
+    FOREIGN KEY (bikeID) REFERENCES bikes(id)
+);
+
+ALTER TABLE `stolenBikeCases` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
