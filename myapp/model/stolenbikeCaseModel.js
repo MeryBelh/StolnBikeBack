@@ -5,6 +5,7 @@ var sql = require('./db.js');
 var StolenBikeCase = function(stolenBikeCase){
     this.policeID = stolenBikeCase.policeID;
     this.bikeID = stolenBikeCase.bikeID;
+    this.resolved= stolenBikeCase.resolved;
 };
 StolenBikeCase.createStolenBikeCase = function (newCase, result) {    
         sql.query("INSERT INTO stolenBikeCases set ?", newCase, function (err, res) {
@@ -42,6 +43,18 @@ StolenBikeCase.getNonAffectedBikes= function ( result) {
             if(err) {
                 console.log("error: ", err);
                 result(err, null);
+            } else{
+                result(null, res);
+            }
+        });   
+};
+
+StolenBikeCase.getAllCases= function ( result) {
+    sql.query(" Select * from bikes b "+
+    " left JOIN stolenBikeCases s ON b.id = s.bikeID ",  function (err, res) {             
+            if(err) {
+                console.log("error: ", err);
+                result(err, null);
             }
             else{
                 result(null, res);
@@ -49,5 +62,22 @@ StolenBikeCase.getNonAffectedBikes= function ( result) {
             }
         });   
 };
+
+StolenBikeCase.solveCase = function(policeID, bikeID, result){
+    console.log(policeID);
+    console.log(bikeID);
+
+    sql.query("UPDATE stolenBikeCases SET resolved = 1 WHERE policeID = ? and bikeID = ? ", [policeID, bikeID], function (err, res) {
+            if(err) {
+                console.log("error: ", err);
+                  result(null, err);
+               }
+             else{   
+                console.log("error: ", res);
+               result(null, res);
+                  }
+              }); 
+  };
+
 
 module.exports= StolenBikeCase;

@@ -84,8 +84,7 @@ else{
 };
 
 exports.getCasesBypoliceId = function(req, res) {
-  console.log(req.params.policeId);
-  console.log("hereeee");
+
   StolenBikeCases.getCasesBypoliceId(req.params.policeId, function(err, stolencases) {
     if (err)
       res.send(err);
@@ -104,3 +103,23 @@ exports.getNonAffectedBikes = function(req, res) {
   });
 };
   
+
+exports.getAllCases = function(req, res) {
+  StolenBikeCases.getAllCases(function(err, cases) {
+
+    if (err)
+      res.send(err);
+      console.log('res', cases);
+    res.send(cases);
+  });
+};
+  
+
+exports.solveCase = function(req, res) {
+  console.log(req.body);
+  StolenBikeCases.solveCase(req.body.policeId, req.body.bikeId, function(err, stolencase) {
+    if (err)
+      res.send(err);
+    res.json(stolencase);
+  });
+};

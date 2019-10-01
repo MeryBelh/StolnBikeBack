@@ -42,6 +42,8 @@ CREATE TABLE IF NOT EXISTS  `stolenBikeCases` (
     `id` int(11) NOT NULL,
     `policeID` int NOT NULL,
     `bikeID` int NOT NULL,
+    `resolved` tinyint(1) ,
+
     PRIMARY KEY (id),
     FOREIGN KEY (policeID) REFERENCES policeOfficers(id),
     FOREIGN KEY (bikeID) REFERENCES bikes(id)
