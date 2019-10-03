@@ -67,7 +67,9 @@ var StolenBikeCases = require('../model/stolenbikeCaseModel');
 exports.createStolenBikeCase = function(req, res) {
   //console.log(req);
   console.log(req.body);
-  var new_case = new StolenBikeCases(req.body);
+      var new_case = {bikeID : req.body.bikeId,
+        policeID : req.body.policeId,
+        resolved : 0};
   console.log(new_case);
   //handles null error 
    if(!new_case.policeID || !new_case.bikeID){
