@@ -32,8 +32,6 @@ Bike.getAllbikes = function (result) {
                 result(null, err);
             }
             else{
-              console.log('bikes : ', res);  
-
              result(null, res);
             }
         });   

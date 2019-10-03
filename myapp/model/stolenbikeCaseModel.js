@@ -24,7 +24,7 @@ StolenBikeCase.getCasesBypoliceId = function (policeId, result) {
     console.log(policeId);
         sql.query(" SELECT * "+
         " FROM bikes b LEFT JOIN stolenBikeCases s ON b.id = s.bikeID "+
-       " WHERE s.policeID = ? ", policeId, function (err, res) {             
+       " WHERE s.policeID = ? and s.resolved = 0 ", policeId, function (err, res) {             
                 if(err) {
                     console.log("error: ", err);
                     result(err, null);
@@ -64,8 +64,6 @@ StolenBikeCase.getAllCases= function ( result) {
 };
 
 StolenBikeCase.solveCase = function(policeID, bikeID, result){
-    console.log(policeID);
-    console.log(bikeID);
 
     sql.query("UPDATE stolenBikeCases SET resolved = 1 WHERE policeID = ? and bikeID = ? ", [policeID, bikeID], function (err, res) {
             if(err) {
@@ -73,7 +71,6 @@ StolenBikeCase.solveCase = function(policeID, bikeID, result){
                   result(null, err);
                }
              else{   
-                console.log("error: ", res);
                result(null, res);
                   }
               }); 
